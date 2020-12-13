@@ -2,9 +2,9 @@
 function db_connect() {
 
   try{
-      $dsn = 'mysql:dbname=todolist;host=localhost;charset=utf8';
-      $user = 'root';
-      $password = 'root';
+      $dsn = 'mysql:dbname=heroku_96cadbb0a954e22;host=us-cdbr-east-02.cleardb.com;charset=utf8';
+      $user = 'HEROKU_USER_NAME';
+      $password = 'HEROKU_PWD';
 
       $dbh = new PDO($dsn, $user, $password);
       $dbh->query('SET NAMES utf8');
@@ -18,3 +18,4 @@ function db_connect() {
       die();
       }
 }
+
