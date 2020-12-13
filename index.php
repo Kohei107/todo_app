@@ -37,14 +37,40 @@ if(isset($_POST['submit'])){
   <form action="index.php" method="post">
 
     <ul>
-      <li>
-      <span>タスク名</span><input type="text" name="name">
-      </li>
-      <li>
+      
+      <span>タスク　</span><input type="text" name="name">
+
       <input type="submit" name="submit">
-      </li>
+      
     </ul>
 
   </form>
+  <ul>
+  <?php
+  $dbh = db_connect();
+
+$sql = 'SELECT id, name FROM tasks ORDER BY id DESC';
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$dbh = null;
+
+while($task = $stmt->fetch(PDO::FETCH_ASSOC)){
+
+  print '<input type="checkbox" name="done">';
+  print $task["name"];
+
+  print '
+          <form action="index.php" method="post">
+          <input type="hidden" name="method" value="put">
+
+<input type="hidden" name="id" value="' . $task['id'] . '">
+          <button type="submit">Done</button>
+          </form>
+        ' ;
+
+}
+
+  ?>
+</ul>
 </body>
 </html>
